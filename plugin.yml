@@ -1,0 +1,10 @@
+name: MountMessages
+version: 1.0
+author: Foaler
+main: me.foaler.beta.Mount
+commands:
+  message:
+  msg:
+  privatemessages:
+  toggleprivatemessages:
+  togglemessages:
