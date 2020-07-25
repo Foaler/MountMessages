@@ -1,0 +1,13 @@
+Messages:
+  playerNotOnline: "&cThis player is currently offline!"
+  cannotMessageYourSelf: "&4You cannot message yourself!"
+  messageReceiver: "&7(&eFrom &c%player%&7) &e%message%"
+  messageSender: "&7(&eTo &c%player%&7) &e%message%"
+  enabledMessages: "&eYour Private Messages has been &aenabled"
+  disabledMessages: "&eYour Private Messages has been &4disabled"
+  forceEnabledMessages: "&eYou have &aenabled &c%player%'s &ePrivate Messages"
+  forceDisabledMessages: "&eYou have &aenabled &c%player%'s &ePrivate Messages"
+  yourPrivateMessagesDisabled: "&eYou have your private messages turned &4off"
+  privateMessagesDisabled: "eThis player has private messages turned &4off"
+  alertChanges: "&eYour Private Messages has been updated by &c%player%"
+  noPermission: "&4You dont have permissions to execute this command!"

@@ -23,11 +23,13 @@ public class TogglePrivateMessagesCommand implements CommandExecutor {
                     if(data.messages == false) {
                         data.messages=true;
 
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eYour Private Messages has been &aenabled"));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                .getString("Messages.enabledMessages")));
                     } else {
                         data.messages=false;
 
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eYour Private Messages has been &4disabled"));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                .getString("Messages.disabledMessages")));
                     }
                     Mount.getInstance().getConfig().set("Users." + data.getPlayer().getName() + ".privatemessages", data.messages);
                     Mount.getInstance().saveConfig();
@@ -43,43 +45,47 @@ public class TogglePrivateMessagesCommand implements CommandExecutor {
                                 if(data.messages == false) {
                                     data.messages=true;
 
-                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                                            "&eYou have &aenabled &c" + target.getName() + "'s &ePrivate Messages"));;
+                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                            .getString("Messages.forceEnabledMessages")));
                                 } else {
                                     data.messages=false;
 
-                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                                            "&eYou have &4disabled &c" + target.getName() + "'s &ePrivate Messages"));
+                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                            .getString("Messages.forceDisabledMessages")));
                                 }
                                 Mount.getInstance().getConfig().set("Users." + data.getPlayer().getName() + ".privatemessages", data.messages);
                                 Mount.getInstance().saveConfig();
-                                target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&eYour Private Messages has been updated by &c" + player.getName()));
+                                target.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                        .getString("Messages.alertChanges").replaceAll("%player%", player.getName())));
                             } else {
                                 PlayerData data = Mount.getInstance().getDataManager().getData(target.getUniqueId());
 
                                 if(data.messages == false) {
                                     data.messages=true;
 
-                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                                            "&eYou have &aenabled &c" + target.getName() + "'s &ePrivate Messages"));
+                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                            .getString("Messages.forceEnabledMessages")));
                                 } else {
                                     data.messages=false;
 
-                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                                            "&eYou have &4disabled &c" + target.getName() + "'s &ePrivate Messages"));
+                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                            .getString("Messages.forceDisabledMessages")));
                                 }
                                 Mount.getInstance().getConfig().set("Users." + data.getPlayer().getName() + ".privatemessages", data.messages);
                                 Mount.getInstance().saveConfig();
                             }
                         } else {
-                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cThis player is currently offline!"));
+                            player.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                    .getString("Messages.playerNotOnline").replaceAll("%player%", args[0])));
                         }
                     } else {
-                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4You dont have permissions to execute this command!"));
+                        player.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                .getString("Messages.noPermission")));
                     }
                 }
             } else {
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4You dont have permissions to execute this command!"));
+                player.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                        .getString("Messages.noPermission")));
             }
         } else {
             sender.sendMessage("Only Players!");

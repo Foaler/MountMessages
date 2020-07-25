@@ -21,7 +21,8 @@ public class MessageCommand implements CommandExecutor {
                 if(target != null) {
                     String message = args[1];
                     if(target.getName().equalsIgnoreCase(sender.getName())) {
-                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4You cannot message yourself!"));
+                        sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                .getString("Messages.cannotMessageYourSelf").replaceAll("%player%", sender.getName())));
                     } else {
                         if(!sender.hasPermission("mountmessages.message.admin") || !sender.hasPermission("mountmessages.*") || !sender.isOp()) {
                             if(sender instanceof Player) {
@@ -31,36 +32,46 @@ public class MessageCommand implements CommandExecutor {
 
                                 if(playerData.messages == false) {
                                     player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                                            "&eYou have your private messages turned &4off"));
+                                            Mount.getInstance().getConfig()
+                                                    .getString("Messages.yourPrivateMessagesDisabled")));
                                 } else if(targetData.messages == false) {
-                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                                            "&eThis player has private messages turned &4off"));
+                                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                            .getString("Messages.privateMessagesDisabled").replaceAll("%player%", target.getName())));
                                 } else {
-                                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7(&eFrom &c" + sender.getName() + ") &e" + message));
-                                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7(&eTo &c" + target.getName() + ") &e" + message));
+                                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                            .getString("Messages.messageReceiver").replaceAll("%player%", sender.getName())));
+                                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                            .getString("Messages.messageSender").replaceAll("%player%", target.getName())));
                                 }
                             } else {
                                 PlayerData data = Mount.getInstance().getDataManager().getData(target.getUniqueId());
 
                                 if(data.messages == false) {
                                     sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                                            "&eThis player has private messages turned &4off"));
+                                            Mount.getInstance().getConfig()
+                                                    .getString("Messages.privateMessagesDisabled").replaceAll("%player%", target.getName())));
                                 } else {
-                                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7(&eFrom &c" + sender.getName() + ") &e" + message));
-                                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7(&eTo &c" + target.getName() + ") &e" + message));
+                                    target.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                            .getString("Messages.messageReceiver").replaceAll("%player%", sender.getName())));
+                                    sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                            .getString("Messages.messageSender").replaceAll("%player%", target.getName())));
                                 }
                             }
                         } else {
-                            target.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7(&eFrom &c" + sender.getName() + ") &e" + message));
-                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&7(&eTo &c" + target.getName() + ") &e" + message));
+                            target.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                    .getString("Messages.messageReceiver").replaceAll("%player%", sender.getName())));
+                            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                                    .getString("Messages.messageSender").replaceAll("%player%", target.getName())));
                         }
                     }
-                } else sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&cThis player is currently offline!"));
+                } else sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                        .getString("Messages.playerNotOnline").replaceAll("%player%", args[0])));
             } else {
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&',"&eUsage&7: &a/" + cmd.getName() + " &7(&cplayer&7) &7(&ctext&7)"));
             }
         } else {
-            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', "&4You dont have permissions to execute this command!"));
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&', Mount.getInstance().getConfig()
+                    .getString("Messages.noPermission")));
         }
         return false;
     }
